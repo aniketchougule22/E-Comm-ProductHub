@@ -9,11 +9,7 @@ router.post("/add", auth, async (req, res) => {
     const { product, totalPrice, quantity } = req.body;
 
     if (!product || !quantity || quantity <= 0) {
-      return res.status(400).json({
-        status: false,
-        statusCode: 400,
-        msg: "Invalid productId or quantity",
-      });
+      return res.status(400).json({ status: false, statusCode: 400, msg: "Invalid productId or quantity" });
     }
     let cart = await Cart.findOne({ user: req["AuthenticateUser"]._id });
 
@@ -44,12 +40,7 @@ router.post("/add", auth, async (req, res) => {
 
     res.json({ status: true, statusCode: 200, data: cart });
   } catch (err) {
-    res.status(500).send({
-      status: false,
-      statusCode: 500,
-      msg: "something went wrong..!",
-      error: err.stack,
-    });
+    res.status(500).send({ status: false, statusCode: 500, msg: "something went wrong..!", error: err.stack });
   }
 });
 
@@ -92,12 +83,7 @@ router.post("/remove", auth, async (req, res) => {
 
     res.json({ status: true, statusCode: 200, data: cart });
   } catch (err) {
-    res.status(500).send({
-      status: false,
-      statusCode: 500,
-      msg: "something went wrong..!",
-      error: err.stack,
-    });
+    res.status(500).send({ status: false, statusCode: 500, msg: "something went wrong..!", error: err.stack });
   }
 });
 
@@ -106,27 +92,12 @@ router.get("/", auth, async (req, res) => {
   try {
     const get = await Cart.findOne({ user: req["AuthenticateUser"]._id });
     if (get == null) {
-      res.status(200).send({
-        status: false,
-        statusCode: 200,
-        msg: "Your Cart is empty..!",
-        data: get,
-      });
+      res.status(200).send({ status: false, statusCode: 200, msg: "Your Cart is empty..!", data: get });
     } else {
-      res.status(200).send({
-        status: true,
-        statusCode: 200,
-        msg: "Cart data found..!",
-        data: get,
-      });
+      res.status(200).send({ status: true, statusCode: 200, msg: "Cart data found..!", data: get });
     }
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      statusCode: 500,
-      msg: "something went wrong..!",
-      error: error.stack,
-    });
+    res.status(500).send({ status: false, statusCode: 500, msg: "something went wrong..!", error: error.stack });
   }
 });
 

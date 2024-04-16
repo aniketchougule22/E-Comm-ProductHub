@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const products = require("../../models/products");
-const cart = require("../../models/cart");
 const auth = require("../../middlewares/auth").isValidToken;
 
 /* Add product */
